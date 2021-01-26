@@ -27,17 +27,17 @@ module OfflineSort
       sorted_chunks = []
 
       enumerable.each do |entry|
-        chunk_entries << entry
-
         if chunk_entries.size == chunk_size
           sorted_chunks << write_sorted_chunk(chunk_entries)
           chunk_entries.clear
         end
+
+        chunk_entries << entry
       end
 
       unless chunk_entries.empty?
-        # In this case we have less than one full chunk so don't need to write
-        # out to disk
+        # In this case we do not have multiple chunks so don't need to write
+        # out to disk to sort
         if sorted_chunks.empty?
           sorted_chunks = [chunk_entries.sort_by(&sort_by).to_enum]
         else

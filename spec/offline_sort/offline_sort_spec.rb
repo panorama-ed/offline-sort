@@ -88,6 +88,17 @@ describe OfflineSort::Sorter do
         it_behaves_like "produces a sorted result"
       end
 
+      context "when the number of entries is exactly the chunk size" do
+        let(:count) { entries_per_chunk }
+
+        it "does not write out to disk" do
+          expect(Tempfile).not_to receive(:open)
+          subject
+        end
+
+        it_behaves_like "produces a sorted result"
+      end
+
       it_behaves_like "produces a sorted result"
     end
 
