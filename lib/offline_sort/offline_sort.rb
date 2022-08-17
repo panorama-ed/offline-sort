@@ -4,8 +4,8 @@ require 'offline_sort/merger'
 require 'tempfile'
 
 module OfflineSort
-  def self.sort(*args, &sort_by)
-    Sorter.new(*args, &sort_by).sort
+  def self.sort(enumerable, **kwargs, &sort_by)
+    Sorter.new(enumerable, **kwargs, &sort_by).sort
   end
 
   class Sorter
